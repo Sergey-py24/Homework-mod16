@@ -12,7 +12,7 @@ async def get_users():
 
 @app.post('/user/{username}/{age}')
 async def post_user(username: Annotated[str, Path(min_length=5, max_length=20, description="Enter username",
-        example="Bobby")], age: int = Path(ge=18, le=120, description="Enter age", example=55)):
+        example="Bobby")], age: Annotated[int, Path(ge=18, le=120, description="Enter age", example=55)]):
     current_index = str(int(max(users, key=int)) + 1)
     user = f"Имя: {username}, возраст: {age}"
     users[current_index] = user
@@ -20,8 +20,8 @@ async def post_user(username: Annotated[str, Path(min_length=5, max_length=20, d
 
 @app.put('/user/{user_id}/{username}/{age}')
 async def update_user(username: Annotated[str, Path(min_length=5, max_length=20, description="Enter username",
-        example="Bobby")],age: int = Path(ge=18, le=120, description="Enter age", example=55),
-        user_id: int = Path(ge=0)):
+        example="Bobby")],age: Annotated[int, Path(ge=18, le=120, description="Enter age", example=55)],
+        user_id: Annotated[int, Path(ge=0)]):
     users[user_id] = f"Имя: {username}, возраст: {age}"
     return f"User with ID {user_id} is updated"
 
