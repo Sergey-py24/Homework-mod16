@@ -9,7 +9,7 @@ async def welcome():
     return 'Главная страница'
 
 @app.get('/user/admin')
-async def welcome():
+async def get_admin():
     return 'Вы вошли как администратор'
 
 @app.get('/user/{user_id}')
